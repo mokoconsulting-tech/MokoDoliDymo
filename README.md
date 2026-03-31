@@ -1,43 +1,52 @@
 # MokoDoliDymo
 
-A Dolibarr module for designing and printing labels using DYMO LabelWriter thermal label printers.
+Print labels from Dolibarr using DYMO LabelWriter printers.
 
-## Overview
+## What It Does
 
-MokoDoliDymo integrates DYMO LabelWriter printers with Dolibarr ERP/CRM. Design label templates with data pulled directly from your Dolibarr records — products, contacts, shipments, warehouses, and more — then print them to any connected LabelWriter device.
+MokoDoliDymo turns your Dolibarr ERP/CRM into a label printing workstation. Connect a DYMO LabelWriter, design your label layouts inside Dolibarr, and print — pulling live data from your products, contacts, warehouses, shipments, or any other Dolibarr record.
 
-### Key Features
+### Use Cases
 
-- Label template designer with drag-and-drop field placement
-- Barcode and QR code generation on labels
-- Data binding to Dolibarr objects (products, third parties, contacts, etc.)
-- Support for standard DYMO LabelWriter label sizes
-- Batch printing from list views
-- Permission-based access control (read, write, delete, print)
+- **Product labels** — print SKU, barcode, price, and description onto shelf or bin labels
+- **Shipping labels** — pull recipient address from a shipment or order and print directly
+- **Asset tags** — generate barcode labels for inventory, equipment, or warehouse locations
+- **Address labels** — batch-print mailing labels from your contact or third-party list
+- **Custom labels** — design freeform layouts with text, barcodes, QR codes, and images
+
+### How It Works
+
+1. **Design** — create label templates in the built-in designer, choosing a DYMO label size and placing fields where you want them
+2. **Bind** — map template fields to Dolibarr data (product ref, third-party name, address, custom extrafields, etc.)
+3. **Print** — select records in Dolibarr and print labels individually or in batch to your LabelWriter
+
+### Supported Hardware
+
+- DYMO LabelWriter 450 / 450 Turbo / 450 Twin Turbo
+- DYMO LabelWriter 550 / 550 Turbo
+- DYMO LabelWriter Wireless
+- Any LabelWriter-compatible printer that accepts standard DYMO label rolls
+
+### Supported Label Sizes
+
+Standard DYMO label rolls including address (30252), shipping (30256), multi-purpose (30334), file folder (30327), name badge (30857), and custom continuous-feed sizes.
 
 ## Requirements
 
 - Dolibarr ERP/CRM 19.0+
 - PHP 8.1+
-- DYMO LabelWriter printer (LabelWriter 450, 550, or compatible)
+- A DYMO LabelWriter printer connected to the server or accessible over the network
 
 ## Installation
-
-Clone into your Dolibarr `custom/` directory:
 
 ```bash
 cd /path/to/dolibarr/htdocs/custom/
 git clone https://github.com/mokoconsulting-tech/MokoDoliDymo.git mokodolidymo
 ```
 
-Then enable the module:
+Then in Dolibarr: **Home > Setup > Modules/Applications** — find **MokoDoliDymo** under **Moko Consulting** and activate it.
 
-1. Log in as administrator
-2. Go to **Home > Setup > Modules/Applications**
-3. Find **MokoDoliDymo** under **Moko Consulting**
-4. Click **Activate**
-
-See [docs/installation.md](docs/installation.md) for detailed instructions.
+See [docs/installation.md](docs/installation.md) for full setup instructions including permissions.
 
 ## Module Identity
 
