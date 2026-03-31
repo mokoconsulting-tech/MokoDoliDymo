@@ -271,7 +271,7 @@ class modMokoDoliDymo extends DolibarrModules
 		*/
 	public function init($options = '')
 	{
-		global $conf, $langs;
+		global $conf, $langs, $user;
 
 		$result = $this->_load_tables('/mokodolidymo/sql/');
 		if ($result < 0) {
@@ -282,7 +282,18 @@ class modMokoDoliDymo extends DolibarrModules
 
 		$sql = array();
 
-		return $this->_init($sql, $options);
+		$init_result = $this->_init($sql, $options);
+
+		// Install default label templates on first activation
+		if ($init_result > 0) {
+			dol_include_once('/mokodolidymo/class/DefaultTemplates.class.php');
+			if (class_exists('DefaultTemplates')) {
+				$user_id = is_object($user) ? $user->id : 1;
+				DefaultTemplates::install($this->db, $user_id);
+			}
+		}
+
+		return $init_result;
 	}
 
 	/**
