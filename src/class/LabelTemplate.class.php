@@ -140,6 +140,7 @@ class LabelTemplate extends CommonObject
 			'contact.country' => 'Country',
 			'contact.phone_pro' => 'Phone (Pro)',
 			'contact.email' => 'Email',
+			'contact.photo' => 'Contact Photo',
 		),
 		'shipment' => array(
 			'shipment.ref' => 'Shipment Ref',
@@ -494,6 +495,9 @@ class LabelTemplate extends CommonObject
 				} else {
 					$values[$key] = '';
 				}
+			} elseif ($field === 'photo' && is_object($object) && !empty($object->photo)) {
+				// Resolve photo field to a base64 data URL
+				$values[$key] = self::getObjectPhotoDataUrl($object, $prefix);
 			} elseif (is_object($object) && property_exists($object, $field)) {
 				$values[$key] = $object->$field;
 			} else {
@@ -535,6 +539,63 @@ class LabelTemplate extends CommonObject
 		$mime = isset($mime_types[$ext]) ? $mime_types[$ext] : 'image/png';
 
 		$data = @file_get_contents($logo_path);
+		if ($data === false) {
+			return '';
+		}
+
+		return 'data:'.$mime.';base64,'.base64_encode($data);
+	}
+
+	/**
+	 * Get a Dolibarr object's photo as a base64 data URL.
+	 * Works for contacts (socpeople), members, users.
+	 *
+	 * @param  CommonObject $object     The object with a photo property
+	 * @param  string       $obj_type   Object type prefix (contact, user, etc.)
+	 * @return string                    Data URL or empty string
+	 */
+	public static function getObjectPhotoDataUrl($object, $obj_type = 'contact')
+	{
+		global $conf;
+
+		if (empty($object->photo)) {
+			return '';
+		}
+
+		$photo_path = '';
+
+		switch ($obj_type) {
+			case 'contact':
+				$dir = !empty($conf->societe->multidir_output[$object->entity])
+					? $conf->societe->multidir_output[$object->entity]
+					: $conf->societe->dir_output;
+				$photo_path = $dir.'/contact/'.get_exdir(0, 0, 0, 0, $object, 'contact').$object->id.'/photos/'.$object->photo;
+				break;
+			case 'user':
+				$photo_path = $conf->user->dir_output.'/'.$object->id.'/photos/'.$object->photo;
+				break;
+			default:
+				return '';
+		}
+
+		if (!file_exists($photo_path)) {
+			// Try without /photos/ subdirectory
+			$alt_path = dirname(dirname($photo_path)).'/'.$object->photo;
+			if (file_exists($alt_path)) {
+				$photo_path = $alt_path;
+			} else {
+				return '';
+			}
+		}
+
+		$mime_types = array(
+			'png' => 'image/png', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg',
+			'gif' => 'image/gif', 'webp' => 'image/webp',
+		);
+		$ext = strtolower(pathinfo($photo_path, PATHINFO_EXTENSION));
+		$mime = isset($mime_types[$ext]) ? $mime_types[$ext] : 'image/jpeg';
+
+		$data = @file_get_contents($photo_path);
 		if ($data === false) {
 			return '';
 		}

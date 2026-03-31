@@ -84,6 +84,7 @@ class DefaultTemplates
 			self::productBarcodeLabel(),
 			self::productShelfLabel(),
 			self::productLargeWithLogo(),
+			self::nameBadgeContact(),
 			self::addressLabelThirdParty(),
 			self::shippingLabel(),
 		);
@@ -475,6 +476,162 @@ class DefaultTemplates
 							'fontWeight' => 'bold',
 							'textAlign' => 'right',
 							'binding' => 'product.price_ttc',
+						),
+					),
+				),
+			),
+		);
+	}
+
+	// ── Name Badge Labels ─────────────────────────────────────
+
+	/**
+	 * Name badge for contacts — photo, name, company, title
+	 * DYMO 30857: 101.6mm x 57.2mm
+	 *
+	 * Layout:
+	 *   ┌──────────────────────────────────────┐
+	 *   │ [LOGO]         Company Name          │
+	 *   │──────────────────────────────────────│
+	 *   │                                      │
+	 *   │  [PHOTO]    FIRST LAST               │
+	 *   │             title / email             │
+	 *   │             phone                     │
+	 *   │                                      │
+	 *   └──────────────────────────────────────┘
+	 */
+	private static function nameBadgeContact()
+	{
+		return array(
+			'ref' => 'LBL-DN01',
+			'label' => 'Name Badge - Contact',
+			'description' => 'Name badge with contact photo, name, company, and details. DYMO 30857.',
+			'label_size' => '30857',
+			'label_width' => 101.6,
+			'label_height' => 57.2,
+			'object_type' => 'contact',
+			'layout' => array(
+				'elements' => array(
+					// Company logo (top-left)
+					array(
+						'id' => 'elem_1',
+						'type' => 'image',
+						'x' => 3,
+						'y' => 2,
+						'width' => 12,
+						'height' => 8,
+						'properties' => array(
+							'src' => '',
+							'fit' => 'contain',
+							'binding' => 'static.company_logo',
+						),
+					),
+					// Company name (top-right of logo)
+					array(
+						'id' => 'elem_2',
+						'type' => 'text',
+						'x' => 17,
+						'y' => 3,
+						'width' => 81,
+						'height' => 5,
+						'properties' => array(
+							'text' => '',
+							'fontSize' => 9,
+							'fontWeight' => 'bold',
+							'textAlign' => 'center',
+							'binding' => 'static.company',
+						),
+					),
+					// Divider
+					array(
+						'id' => 'elem_3',
+						'type' => 'line',
+						'x' => 3,
+						'y' => 12,
+						'width' => 95,
+						'height' => 0.5,
+						'properties' => array(
+							'direction' => 'horizontal',
+							'thickness' => 0.5,
+							'color' => '#000000',
+						),
+					),
+					// Contact photo (left side)
+					array(
+						'id' => 'elem_4',
+						'type' => 'image',
+						'x' => 5,
+						'y' => 16,
+						'width' => 24,
+						'height' => 30,
+						'properties' => array(
+							'src' => '',
+							'fit' => 'contain',
+							'binding' => 'contact.photo',
+						),
+					),
+					// First name (large, bold)
+					array(
+						'id' => 'elem_5',
+						'type' => 'text',
+						'x' => 33,
+						'y' => 16,
+						'width' => 64,
+						'height' => 9,
+						'properties' => array(
+							'text' => '',
+							'fontSize' => 18,
+							'fontWeight' => 'bold',
+							'textAlign' => 'left',
+							'binding' => 'contact.firstname',
+						),
+					),
+					// Last name (large, bold)
+					array(
+						'id' => 'elem_6',
+						'type' => 'text',
+						'x' => 33,
+						'y' => 25,
+						'width' => 64,
+						'height' => 9,
+						'properties' => array(
+							'text' => '',
+							'fontSize' => 18,
+							'fontWeight' => 'bold',
+							'textAlign' => 'left',
+							'binding' => 'contact.lastname',
+						),
+					),
+					// Email
+					array(
+						'id' => 'elem_7',
+						'type' => 'text',
+						'x' => 33,
+						'y' => 35,
+						'width' => 64,
+						'height' => 5,
+						'properties' => array(
+							'text' => '',
+							'fontSize' => 8,
+							'fontWeight' => 'normal',
+							'textAlign' => 'left',
+							'binding' => 'contact.email',
+						),
+					),
+					// Phone
+					array(
+						'id' => 'elem_8',
+						'type' => 'text',
+						'x' => 33,
+						'y' => 41,
+						'width' => 64,
+						'height' => 5,
+						'properties' => array(
+							'text' => '',
+							'fontSize' => 8,
+							'fontWeight' => 'normal',
+							'textAlign' => 'left',
+							'binding' => 'contact.phone_pro',
 						),
 					),
 				),
