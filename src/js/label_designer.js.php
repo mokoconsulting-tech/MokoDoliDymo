@@ -245,7 +245,8 @@ var MDD = (function() {
 				break;
 
 			case 'image':
-				appendFileInput(propsPanel, 'Image File', function(dataUrl) {
+				appendBindingSelect(propsPanel, props.binding || '');
+				appendFileInput(propsPanel, 'Image File (or use binding above)', function(dataUrl) {
 					setSubProp('src', dataUrl);
 				});
 				if (props.src) {

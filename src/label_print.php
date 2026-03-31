@@ -396,8 +396,13 @@ print '</div>';
 					break;
 
 				case 'image':
-					if (props.src) {
-						var b64 = props.src.replace(/^data:image\/\w+;base64,/, '');
+					// Resolve image source: bound value (e.g. company logo data URL) or static src
+					var imgSrc = props.src || '';
+					if (props.binding && values && values[props.binding]) {
+						imgSrc = values[props.binding];
+					}
+					if (imgSrc) {
+						var b64 = imgSrc.replace(/^data:image\/\w+;base64,/, '');
 						xml += '<ImageObject><Name>' + escXml(el.id) + '</Name>';
 						xml += '<ScaleMode>Uniform</ScaleMode>';
 						xml += '<Image>' + b64 + '</Image>';

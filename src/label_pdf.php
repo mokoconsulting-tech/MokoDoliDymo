@@ -162,16 +162,21 @@ foreach ($records as $record) {
 				break;
 
 			case 'image':
-				if (!empty($props['src'])) {
+				// Resolve image source: bound value (e.g. company logo) or static src
+				$img_data = '';
+				if (!empty($props['binding']) && isset($values[$props['binding']]) && $values[$props['binding']] !== '') {
+					$img_data = $values[$props['binding']];
+				} elseif (!empty($props['src'])) {
 					$img_data = $props['src'];
-					if (preg_match('/^data:image\/(\w+);base64,(.+)$/', $img_data, $matches)) {
-						$img_ext = $matches[1];
-						$img_raw = base64_decode($matches[2]);
-						$tmp_file = tempnam(sys_get_temp_dir(), 'mdd_img_').'.'.$img_ext;
-						file_put_contents($tmp_file, $img_raw);
-						$pdf->Image($tmp_file, $x, $y, $w, $h, '', '', '', true, 300, '', false, false, 0, 'CM');
-						@unlink($tmp_file);
-					}
+				}
+
+				if (!empty($img_data) && preg_match('/^data:image\/(\w+);base64,(.+)$/', $img_data, $matches)) {
+					$img_ext = $matches[1];
+					$img_raw = base64_decode($matches[2]);
+					$tmp_file = tempnam(sys_get_temp_dir(), 'mdd_img_').'.'.$img_ext;
+					file_put_contents($tmp_file, $img_raw);
+					$pdf->Image($tmp_file, $x, $y, $w, $h, '', '', '', true, 300, '', false, false, 0, 'CM');
+					@unlink($tmp_file);
 				}
 				break;
 

@@ -284,8 +284,33 @@ class modMokoDoliDymo extends DolibarrModules
 
 		$init_result = $this->_init($sql, $options);
 
-		// Install default label templates on first activation
+		// Create extrafields on activation
 		if ($init_result > 0) {
+			include_once DOL_DOCUMENT_ROOT.'/core/class/extrafields.class.php';
+			$extrafields = new ExtraFields($this->db);
+			// "Label Short Text" — a short text field on products for custom label content
+			$extrafields->addExtraField(
+				'mokodolidymo_label_text',     // attr name
+				'Label Short Text',            // label
+				'varchar',                     // type
+				100,                           // position
+				128,                           // size
+				'product',                     // element type
+				0,                             // unique
+				0,                             // required
+				'',                            // default value
+				'',                            // params
+				1,                             // always editable
+				'',                            // lang file
+				0,                             // enabled condition (0 = always)
+				0,                             // totalizable
+				'',                            // help
+				'',                            // computed
+				'mokodolidymo@mokodolidymo',   // entity
+				'isModEnabled("mokodolidymo")' // visible condition
+			);
+
+			// Install default label templates
 			dol_include_once('/mokodolidymo/class/DefaultTemplates.class.php');
 			if (class_exists('DefaultTemplates')) {
 				$user_id = is_object($user) ? $user->id : 1;

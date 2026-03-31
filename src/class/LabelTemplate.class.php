@@ -118,6 +118,7 @@ class LabelTemplate extends CommonObject
 			'product.description' => 'Description',
 			'product.note_public' => 'Public Note',
 			'product.fk_barcode_type' => 'Barcode Type',
+			'extra.mokodolidymo_label_text' => 'Label Short Text',
 		),
 		'thirdparty' => array(
 			'thirdparty.nom' => 'Company Name',
@@ -449,10 +450,11 @@ class LabelTemplate extends CommonObject
 		$type = $this->object_type ?: 'product';
 		$fields = isset(self::BINDABLE_FIELDS[$type]) ? self::BINDABLE_FIELDS[$type] : array();
 
-		// Add common static fields
+		// Add common static fields available to all object types
 		$fields['static.text'] = 'Static Text';
 		$fields['static.date'] = 'Current Date';
 		$fields['static.company'] = 'My Company Name';
+		$fields['static.company_logo'] = 'My Company Logo';
 
 		return $fields;
 	}
@@ -479,6 +481,16 @@ class LabelTemplate extends CommonObject
 				} elseif ($field === 'company') {
 					global $mysoc;
 					$values[$key] = $mysoc->name;
+				} elseif ($field === 'company_logo') {
+					$values[$key] = self::getCompanyLogoDataUrl();
+				} else {
+					$values[$key] = '';
+				}
+			} elseif ($prefix === 'extra' && is_object($object)) {
+				// Extrafields: extra.fieldname
+				if (property_exists($object, 'array_options') && is_array($object->array_options)) {
+					$extra_key = 'options_'.$field;
+					$values[$key] = isset($object->array_options[$extra_key]) ? $object->array_options[$extra_key] : '';
 				} else {
 					$values[$key] = '';
 				}
@@ -490,6 +502,44 @@ class LabelTemplate extends CommonObject
 		}
 
 		return $values;
+	}
+
+	/**
+	 * Get the company logo as a base64 data URL.
+	 * Reads from Dolibarr's mysoc logo path.
+	 *
+	 * @return string Data URL (data:image/...) or empty string
+	 */
+	public static function getCompanyLogoDataUrl()
+	{
+		global $conf, $mysoc;
+
+		if (empty($mysoc->logo)) {
+			return '';
+		}
+
+		$logo_path = $conf->mycompany->dir_output.'/logos/'.$mysoc->logo;
+		if (!file_exists($logo_path)) {
+			// Try thumb version
+			$logo_path = $conf->mycompany->dir_output.'/logos/thumbs/'.$mysoc->logo;
+			if (!file_exists($logo_path)) {
+				return '';
+			}
+		}
+
+		$mime_types = array(
+			'png' => 'image/png', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg',
+			'gif' => 'image/gif', 'svg' => 'image/svg+xml', 'webp' => 'image/webp',
+		);
+		$ext = strtolower(pathinfo($logo_path, PATHINFO_EXTENSION));
+		$mime = isset($mime_types[$ext]) ? $mime_types[$ext] : 'image/png';
+
+		$data = @file_get_contents($logo_path);
+		if ($data === false) {
+			return '';
+		}
+
+		return 'data:'.$mime.';base64,'.base64_encode($data);
 	}
 
 	/**

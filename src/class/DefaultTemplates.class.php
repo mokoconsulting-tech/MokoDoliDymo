@@ -83,6 +83,7 @@ class DefaultTemplates
 			self::fileFolderThirdPartyCompact(),
 			self::productBarcodeLabel(),
 			self::productShelfLabel(),
+			self::productLargeWithLogo(),
 			self::addressLabelThirdParty(),
 			self::shippingLabel(),
 		);
@@ -315,6 +316,162 @@ class DefaultTemplates
 							'fontSize' => 14,
 							'fontWeight' => 'bold',
 							'textAlign' => 'center',
+							'binding' => 'product.price_ttc',
+						),
+					),
+				),
+			),
+		);
+	}
+
+	// ── Address / Mailing Labels ──────────────────────────────
+
+	/**
+	 * Large product label with company logo — name badge size
+	 * DYMO 30857: 101.6mm x 57.2mm
+	 *
+	 * Layout:
+	 *   ┌──────────────────────────────────────┐
+	 *   │ [LOGO]  Company Name                 │
+	 *   │─────────────────────────────────────  │
+	 *   │  Product Ref          Label Short Text│
+	 *   │  Product Label (large, bold)          │
+	 *   │  ||||||||||||||||||||||||              │
+	 *   │  barcode              Price           │
+	 *   └──────────────────────────────────────┘
+	 */
+	private static function productLargeWithLogo()
+	{
+		return array(
+			'ref' => 'LBL-DP03',
+			'label' => 'Large Product Label with Logo',
+			'description' => 'Name badge sized product label with company logo, product details, barcode, and price. DYMO 30857.',
+			'label_size' => '30857',
+			'label_width' => 101.6,
+			'label_height' => 57.2,
+			'object_type' => 'product',
+			'layout' => array(
+				'elements' => array(
+					// Company logo (top-left)
+					array(
+						'id' => 'elem_1',
+						'type' => 'image',
+						'x' => 3,
+						'y' => 2,
+						'width' => 18,
+						'height' => 12,
+						'properties' => array(
+							'src' => '',
+							'fit' => 'contain',
+							'binding' => 'static.company_logo',
+						),
+					),
+					// Company name (top, next to logo)
+					array(
+						'id' => 'elem_2',
+						'type' => 'text',
+						'x' => 23,
+						'y' => 3,
+						'width' => 75,
+						'height' => 6,
+						'properties' => array(
+							'text' => '',
+							'fontSize' => 10,
+							'fontWeight' => 'bold',
+							'textAlign' => 'left',
+							'binding' => 'static.company',
+						),
+					),
+					// Divider line below header
+					array(
+						'id' => 'elem_3',
+						'type' => 'line',
+						'x' => 3,
+						'y' => 16,
+						'width' => 95,
+						'height' => 0.5,
+						'properties' => array(
+							'direction' => 'horizontal',
+							'thickness' => 0.5,
+							'color' => '#000000',
+						),
+					),
+					// Product ref (left side, below divider)
+					array(
+						'id' => 'elem_4',
+						'type' => 'text',
+						'x' => 3,
+						'y' => 18,
+						'width' => 40,
+						'height' => 5,
+						'properties' => array(
+							'text' => '',
+							'fontSize' => 8,
+							'fontWeight' => 'normal',
+							'textAlign' => 'left',
+							'binding' => 'product.ref',
+						),
+					),
+					// Label short text (right side, below divider)
+					array(
+						'id' => 'elem_5',
+						'type' => 'text',
+						'x' => 50,
+						'y' => 18,
+						'width' => 48,
+						'height' => 5,
+						'properties' => array(
+							'text' => '',
+							'fontSize' => 8,
+							'fontWeight' => 'normal',
+							'textAlign' => 'right',
+							'binding' => 'extra.mokodolidymo_label_text',
+						),
+					),
+					// Product label / name (large, bold, center section)
+					array(
+						'id' => 'elem_6',
+						'type' => 'text',
+						'x' => 3,
+						'y' => 24,
+						'width' => 95,
+						'height' => 9,
+						'properties' => array(
+							'text' => '',
+							'fontSize' => 16,
+							'fontWeight' => 'bold',
+							'textAlign' => 'left',
+							'binding' => 'product.label',
+						),
+					),
+					// Barcode (bottom-left)
+					array(
+						'id' => 'elem_7',
+						'type' => 'barcode',
+						'x' => 3,
+						'y' => 35,
+						'width' => 55,
+						'height' => 16,
+						'properties' => array(
+							'data' => '',
+							'format' => 'CODE128',
+							'showText' => true,
+							'binding' => 'product.barcode',
+						),
+					),
+					// Price (bottom-right, large)
+					array(
+						'id' => 'elem_8',
+						'type' => 'text',
+						'x' => 62,
+						'y' => 38,
+						'width' => 36,
+						'height' => 14,
+						'properties' => array(
+							'text' => '',
+							'fontSize' => 24,
+							'fontWeight' => 'bold',
+							'textAlign' => 'right',
 							'binding' => 'product.price_ttc',
 						),
 					),
