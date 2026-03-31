@@ -1,6 +1,6 @@
 {
-    "name": "mokoconsulting-tech/mokostandards-template-dolibarr",
-    "description": "MokoStandards-Template-Dolibarr Dolibarr module by Moko Consulting",
+    "name": "mokoconsulting-tech/mokodolidymo",
+    "description": "MokoDoliDymo - Dolibarr module for designing and printing DYMO LabelWriter labels",
     "type": "dolibarr-module",
     "version": "01.00.00",
     "license": "GPL-3.0-or-later",
@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "MokoConsulting\\MokoStandards-Template-Dolibarr\\": "src/"
+            "MokoConsulting\\MokoDoliDymo\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MokoConsulting\\MokoStandards-Template-Dolibarr\\Tests\\": "tests/"
+            "MokoConsulting\\MokoDoliDymo\\Tests\\": "tests/"
         }
     },
     "repositories": [

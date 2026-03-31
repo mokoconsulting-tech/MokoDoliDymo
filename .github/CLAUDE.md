@@ -1,41 +1,13 @@
-> [!IMPORTANT]
-> **🔧 AI Self-Update Required on First Use**
->
-> This file may contain unfilled `{{TOKEN}}` placeholders. The MokoStandards bulk-sync system
-> replaces them automatically at sync time; if you can still see them, sync has not yet run for
-> this repository — or this is a brand-new repo.
->
-> **On your very first interaction in this repository, before answering any other question:**
->
-> 1. Check whether any `{{TOKEN}}` placeholders remain in this file.
-> 2. If they do, locate the values as described in the table below and replace every occurrence
->    in **both** `.github/copilot-instructions.md` and `.github/CLAUDE.md`.
-> 3. After replacing all tokens, **delete this entire notice block** (from `> [!IMPORTANT]`
->    through the closing `> ---` line) in both files.
-> 4. Tell the developer: *"I've self-updated the AI context files with this repository's
->    values — all set."*
->
-> | Placeholder | Where to find the value |
-> |---|---|
-> | `MokoStandards-Template-Dolibarr` | The GitHub repository name (visible in the URL, `README.md` heading, or `git remote -v`) |
-> | `https://github.com/mokoconsulting-tech/MokoStandards-Template-Dolibarr` | Full GitHub URL, e.g. `https://github.com/mokoconsulting-tech/<repo-name>` |
-> | `A repo template for a Dolibarr module coding project according to MokoStandards` | First paragraph of `README.md` body, or the GitHub repo description |
-> | `mokostandardstemplatedolibarr` | The module name as used in Dolibarr (lowercase, e.g. `mymodule`) — from the `langs/en_US/*.lang` filename or `$this->rights_class` in the module descriptor |
-> | `MokoStandards-Template-Dolibarr` | PascalCase module class name (e.g. `MyModule`) — from the `src/core/modules/mod*.class.php` filename |
-> | `500000` | The `$this->numero` value in `src/core/modules/mod*.class.php`; check [module-registry.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/development/crm/module-registry.md) if creating a new module |
->
-> ---
-
 # What This Repo Is
 
-**MokoStandards-Template-Dolibarr** is a Moko Consulting **MokoCRM** (Dolibarr) module repository.
+**MokoDoliDymo** is a Moko Consulting **MokoCRM** (Dolibarr) module repository.
 
-A repo template for a Dolibarr module coding project according to MokoStandards
+A Dolibarr module for designing and printing labels for DYMO LabelWriter label makers.
 
-Module name: **mokostandardstemplatedolibarr**
-Module class: **MokoStandards-Template-Dolibarr**
-Module ID: **500000** *(unique, immutable — registered in [module-registry.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/development/crm/module-registry.md))*
-Repository URL: https://github.com/mokoconsulting-tech/MokoStandards-Template-Dolibarr
+Module name: **mokodolidymo**
+Module class: **MokoDoliDymo**
+Module ID: **185072** *(unique, immutable — registered in [module-registry.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/development/crm/module-registry.md))*
+Repository URL: https://github.com/mokoconsulting-tech/MokoDoliDymo
 
 This repository is governed by [MokoStandards](https://github.com/mokoconsulting-tech/MokoStandards) — the single source of truth for coding standards, file-header policies, GitHub Actions workflows, and Terraform configuration templates across all Moko Consulting repositories.
 
@@ -44,14 +16,14 @@ This repository is governed by [MokoStandards](https://github.com/mokoconsulting
 # Repo Structure
 
 ```
-MokoStandards-Template-Dolibarr/
+MokoDoliDymo/
 ├── src/                              # Module source (deployed to Dolibarr)
 │   ├── README.md                     # End-user documentation
 │   ├── core/
 │   │   └── modules/
-│   │       └── modMokoStandards-Template-Dolibarr.class.php  # Main module descriptor
+│   │       └── modMokoDoliDymo.class.php  # Main module descriptor
 │   ├── langs/
-│   │   └── en_US/mokostandardstemplatedolibarr.lang
+│   │   └── en_US/mokodolidymo.lang
 │   ├── sql/                          # Database schema
 │   ├── class/                        # PHP class files
 │   └── lib/                          # Library files
@@ -94,16 +66,16 @@ Two artefacts must always carry the same version:
 | Artefact | Location |
 |----------|----------|
 | `README.md` | `FILE INFORMATION VERSION` field + badge |
-| Module descriptor | `$this->version` in `src/core/modules/modMokoStandards-Template-Dolibarr.class.php` |
+| Module descriptor | `$this->version` in `src/core/modules/modMokoDoliDymo.class.php` |
 
 ---
 
 # Module Descriptor Class
 
-The file `src/core/modules/modMokoStandards-Template-Dolibarr.class.php` is the Dolibarr module descriptor. The key properties:
+The file `src/core/modules/modMokoDoliDymo.class.php` is the Dolibarr module descriptor. The key properties:
 
 ```php
-public $numero  = 500000;       // IMMUTABLE — never change; registered globally
+public $numero  = 185072;       // IMMUTABLE — never change; registered globally
 public $version = 'XX.YY.ZZ';         // Must match README.md version exactly
 ```
 
@@ -127,9 +99,9 @@ Every new file **must** have a copyright header as its first content. JSON files
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
  * FILE INFORMATION
- * DEFGROUP: MokoStandards-Template-Dolibarr.Module
- * INGROUP: MokoStandards-Template-Dolibarr
- * REPO: https://github.com/mokoconsulting-tech/MokoStandards-Template-Dolibarr
+ * DEFGROUP: MokoDoliDymo.Module
+ * INGROUP: MokoDoliDymo
+ * REPO: https://github.com/mokoconsulting-tech/MokoDoliDymo
  * PATH: /src/class/MyClass.php
  * VERSION: XX.YY.ZZ
  * BRIEF: One-line description of file purpose

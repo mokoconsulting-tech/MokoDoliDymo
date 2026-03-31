@@ -2,8 +2,8 @@
 host = https://www.transifex.com
 lang_map = uz: uz_UZ
 
-[mymodule.mymodule]
-file_filter = langs/<lang>/mymodule.lang
-source_file = langs/en_US/mymodule.lang
+[mokodolidymo.mokodolidymo]
+file_filter = langs/<lang>/mokodolidymo.lang
+source_file = langs/en_US/mokodolidymo.lang
 source_lang = en_US
 type = MOZILLAPROPERTIES

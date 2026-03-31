@@ -1,0 +1,47 @@
+# Translation file
+
+#
+# Generic
+#
+
+# Module label 'ModuleMokoDoliDymoName'
+ModuleMokoDoliDymoName = MokoDoliDymo
+# Module description 'ModuleMokoDoliDymoDesc'
+ModuleMokoDoliDymoDesc = Design and print labels for DYMO LabelWriter label makers
+# Module long description 'ModuleMokoDoliDymoDescLong'
+ModuleMokoDoliDymoDescLong = A Dolibarr module for designing, managing, and printing labels using DYMO LabelWriter thermal label printers. Create label templates with product data, barcodes, addresses, and custom fields from your Dolibarr records.
+
+#
+# Admin page
+#
+MokoDoliDymoSetup = MokoDoliDymo Setup
+Settings = Settings
+MokoDoliDymoSetupPage = MokoDoliDymo setup page
+
+#
+# About page
+#
+About = About
+MokoDoliDymoAbout = About MokoDoliDymo
+MokoDoliDymoAboutPage = MokoDoliDymo about page
+
+#
+# Label designer page
+#
+MokoDoliDymoArea = MokoDoliDymo - Label Designer
+MyPageName = Label Designer
+
+#
+# Labels
+#
+LabelTemplate = Label Template
+LabelTemplates = Label Templates
+NewLabelTemplate = New Label Template
+EditLabelTemplate = Edit Label Template
+DeleteLabelTemplate = Delete Label Template
+PrintLabel = Print Label
+PrintLabels = Print Labels
+LabelWidth = Label Width
+LabelHeight = Label Height
+LabelSize = Label Size
+LabelPreview = Label Preview

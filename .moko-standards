@@ -17,4 +17,4 @@
 standards_source: "https://github.com/mokoconsulting-tech/MokoStandards"
 standards_version: "04.00.04"
 platform: "crm-module"
-governed_repo: "mokoconsulting-tech/MokoStandards-Template-Dolibarr"
+governed_repo: "mokoconsulting-tech/MokoDoliDymo"

@@ -16,12 +16,12 @@
  You should have received a copy of the GNU General Public License (./LICENSE).
 
  FILE INFORMATION
- DEFGROUP: mokoconsulting-tech.MokoStandards-Template-Dolibarr
+ DEFGROUP: mokoconsulting-tech.MokoDoliDymo
  INGROUP: MokoStandards.Governance
- REPO: https://github.com/mokoconsulting-tech/MokoStandards-Template-Dolibarr
+ REPO: https://github.com/mokoconsulting-tech/MokoDoliDymo
  VERSION: 04.00.04
  PATH: /GOVERNANCE.md
- BRIEF: Project governance rules, roles, and decision process for MokoStandards-Template-Dolibarr
+ BRIEF: Project governance rules, roles, and decision process for MokoDoliDymo
 -->
 
 [![MokoStandards](https://img.shields.io/badge/MokoStandards-04.00.04-blue)](https://github.com/mokoconsulting-tech/MokoStandards)
@@ -30,7 +30,7 @@
 
 ## Overview
 
-This document defines the governance model for the `MokoStandards-Template-Dolibarr` repository within the
+This document defines the governance model for the `MokoDoliDymo` repository within the
 `mokoconsulting-tech` organization. It is automatically maintained by
 [MokoStandards](https://github.com/mokoconsulting-tech/MokoStandards) v04.00.04.
 
@@ -97,7 +97,7 @@ See the full policy:
 
 ## Reporting Issues
 
-- **Bugs / Features**: Open a [GitHub Issue](https://github.com/mokoconsulting-tech/MokoStandards-Template-Dolibarr/issues)
+- **Bugs / Features**: Open a [GitHub Issue](https://github.com/mokoconsulting-tech/MokoDoliDymo/issues)
 - **Security vulnerabilities**: See [SECURITY.md](./SECURITY.md)
 - **Code of Conduct**: See [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)
 - **Contact**: dev@mokoconsulting.tech
@@ -110,10 +110,10 @@ See the full policy:
 | ------------- | ----------------------------------------------- |
 | Document Type | Policy                                          |
 | Domain        | Governance                                      |
-| Applies To    | mokoconsulting-tech/MokoStandards-Template-Dolibarr                           |
+| Applies To    | mokoconsulting-tech/MokoDoliDymo                           |
 | Jurisdiction  | Tennessee, USA                                  |
 | Maintainer    | @mokoconsulting-tech                            |
 | Standards     | MokoStandards v04.00.04            |
-| Repo          | https://github.com/mokoconsulting-tech/MokoStandards-Template-Dolibarr        |
+| Repo          | https://github.com/mokoconsulting-tech/MokoDoliDymo        |
 | Path          | /GOVERNANCE.md                                  |
 | Status        | Active — auto-maintained by MokoStandards       |

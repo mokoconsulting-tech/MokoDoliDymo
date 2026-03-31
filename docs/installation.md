@@ -1,163 +1,80 @@
 # Installation Guide
 
-This guide provides detailed instructions for installing and configuring your Dolibarr module.
-
 ## Prerequisites
 
-Before installing the module, ensure you have:
+- **Dolibarr ERP/CRM**: Version 19.0 or higher
+- **PHP**: 8.1 or higher
+- **DYMO LabelWriter**: LabelWriter 450, 550, or compatible model
+- **PHP Extensions**: mysqli or pgsql, gd, curl, json
 
-- **Dolibarr ERP/CRM**: Version 12.0 or higher
-- **PHP**: Version 7.4 or higher
-- **Web Server**: Apache 2.4+ or Nginx 1.18+
-- **Database**: MySQL 5.7+, MariaDB 10.3+, or PostgreSQL 11+
-- **PHP Extensions**:
-  - mysqli or pgsql
-  - gd or imagick
-  - curl
-  - json
-  - xml
-
-## Installation Steps
+## Installation
 
 ### 1. Clone the Repository
 
-Navigate to your Dolibarr's custom directory:
+Navigate to your Dolibarr custom modules directory and clone:
 
 ```bash
 cd /path/to/dolibarr/htdocs/custom/
+git clone https://github.com/mokoconsulting-tech/MokoDoliDymo.git mokodolidymo
 ```
 
-Clone this template repository:
+### 2. Set File Permissions
 
 ```bash
-git clone https://github.com/mokoconsulting-tech/MokoStandards-Template-Dolibarr.git yourmodule
+chown -R www-data:www-data /path/to/dolibarr/htdocs/custom/mokodolidymo
+find /path/to/dolibarr/htdocs/custom/mokodolidymo -type d -exec chmod 755 {} \;
+find /path/to/dolibarr/htdocs/custom/mokodolidymo -type f -exec chmod 644 {} \;
 ```
 
-Replace `yourmodule` with your desired module name (lowercase, no spaces).
+### 3. Enable the Module
 
-### 2. Rename and Configure
+1. Log in to Dolibarr as an administrator
+2. Navigate to **Home > Setup > Modules/Applications**
+3. Find **MokoDoliDymo** under the **Moko Consulting** family
+4. Click **Activate**
 
-Navigate to the module directory:
+### 4. Configure Permissions
 
-```bash
-cd yourmodule
-```
+After activation, assign permissions to users:
 
-Rename the module descriptor file:
+1. Go to **Home > Users & Groups**
+2. Select the user or group
+3. Under **Permissions**, find **MokoDoliDymo** and enable:
+   - **Read label templates** — view existing labels
+   - **Create/Update label templates** — design and edit labels
+   - **Delete label templates** — remove labels
+   - **Print labels** — send labels to the printer
 
-```bash
-mv modYourmodule.class.php modYourModuleName.class.php
-```
+### 5. Configure Module Settings
 
-### 3. Configure Module ID
-
-Open the module descriptor file and set a temporary module ID greater than 600,000:
-
-```php
-// In modYourModuleName.class.php
-$this->numero = 600001; // Use a number > 600,000 for development
-```
-
-**Important:** Before publishing, request an official module ID by creating an issue in the repository.
-
-### 4. Set File Permissions
-
-Ensure proper file permissions:
-
-```bash
-# Set ownership (adjust user:group as needed)
-chown -R www-data:www-data /path/to/dolibarr/htdocs/custom/yourmodule
-
-# Set directory permissions
-find /path/to/dolibarr/htdocs/custom/yourmodule -type d -exec chmod 755 {} \;
-
-# Set file permissions
-find /path/to/dolibarr/htdocs/custom/yourmodule -type f -exec chmod 644 {} \;
-```
-
-### 5. Enable the Module in Dolibarr
-
-1. Log in to your Dolibarr instance as an administrator
-2. Navigate to **Home → Setup → Modules/Applications**
-3. Find your module in the list
-4. Click the **Activate** button
-
-### 6. Configure Module Settings (if applicable)
-
-After activation:
-
-1. Go to **Home → Setup → Modules/Applications**
-2. Click on your module name to access its configuration page
-3. Configure any required settings
-4. Save changes
-
-## Database Setup
-
-If your module requires database tables:
-
-### Automatic Setup
-
-The module descriptor can handle automatic table creation during activation. Ensure your SQL files are in the `sql/` directory:
-
-```
-sql/
-├── llx_yourmodule_table.sql
-└── llx_yourmodule_table.key.sql
-```
-
-### Manual Setup
-
-Alternatively, run SQL scripts manually:
-
-```bash
-mysql -u username -p database_name < sql/llx_yourmodule_table.sql
-```
+1. Go to **Home > Setup > Modules/Applications**
+2. Click on **MokoDoliDymo** to access settings
+3. Configure printer connection and default label sizes
 
 ## Troubleshooting
 
 ### Module Not Appearing
 
-- Clear Dolibarr cache: Delete `/documents/install.lock` and refresh
-- Check file permissions
-- Verify PHP syntax errors: `php -l modYourModuleName.class.php`
+- Verify the module directory is named `mokodolidymo` (lowercase)
+- Clear Dolibarr cache and refresh
+- Check PHP syntax: `php -l src/core/modules/modMokoDoliDymo.class.php`
+- Ensure `$dolibarr_main_document_root_alt` is set in `conf/conf.php`
 
 ### Permission Errors
 
-- Ensure Apache/Nginx user has read access to all module files
-- Check `conf.php` file permissions in Dolibarr root
-
-### Database Errors
-
-- Verify database credentials in Dolibarr's `conf/conf.php`
-- Check SQL file syntax
-- Ensure database user has CREATE TABLE permissions
+- Ensure the web server user has read access to all module files
+- Verify the module is activated before assigning permissions
 
 ## Uninstallation
 
-To remove the module:
-
-1. Navigate to **Home → Setup → Modules/Applications**
-2. Find your module and click **Deactivate**
-3. Optionally, remove the module directory:
+1. Go to **Home > Setup > Modules/Applications**
+2. Find **MokoDoliDymo** and click **Deactivate**
+3. Optionally remove the module directory:
    ```bash
-   rm -rf /path/to/dolibarr/htdocs/custom/yourmodule
+   rm -rf /path/to/dolibarr/htdocs/custom/mokodolidymo
    ```
-
-**Note:** Deactivating the module does not remove database tables. To remove data:
-
-```sql
-DROP TABLE llx_yourmodule_table;
-```
 
 ## Next Steps
 
-- Review the [Development Guide](development.md) to start customizing your module
-- Check the [Module ID Policy](module-id-policy.md) before distribution
-- Read the [Changelog](changelog.md) for version history
-
-## Support
-
-For installation issues:
-- Create an issue in the repository
-- Check Dolibarr logs: `/documents/dolibarr.log`
-- Visit the [Dolibarr Forum](https://www.dolibarr.org/forum)
+- Read the [Development Guide](development.md) if you want to extend the module
+- Check the [Changelog](changelog.md) for version history

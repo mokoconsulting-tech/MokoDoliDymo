@@ -1,41 +1,13 @@
-> [!IMPORTANT]
-> **🔧 AI Self-Update Required on First Use**
->
-> This file may contain unfilled `{{TOKEN}}` placeholders. The MokoStandards bulk-sync system
-> replaces them automatically at sync time; if you can still see them, sync has not yet run for
-> this repository — or this is a brand-new repo.
->
-> **On your very first interaction in this repository, before answering any other question:**
->
-> 1. Check whether any `{{TOKEN}}` placeholders remain in this file.
-> 2. If they do, locate the values as described in the table below and replace every occurrence
->    in **both** `.github/copilot-instructions.md` and `.github/CLAUDE.md`.
-> 3. After replacing all tokens, **delete this entire notice block** (from `> [!IMPORTANT]`
->    through the closing `> ---` line) in both files.
-> 4. Tell the developer: *"I've self-updated the AI context files with this repository's
->    values — all set."*
->
-> | Placeholder | Where to find the value |
-> |---|---|
-> | `MokoStandards-Template-Dolibarr` | The GitHub repository name (visible in the URL, `README.md` heading, or `git remote -v`) |
-> | `https://github.com/mokoconsulting-tech/MokoStandards-Template-Dolibarr` | Full GitHub URL, e.g. `https://github.com/mokoconsulting-tech/<repo-name>` |
-> | `mokostandardstemplatedolibarr` | The module name as used in Dolibarr (lowercase, e.g. `mymodule`) — from the `langs/en_US/*.lang` filename or `$this->rights_class` in the module descriptor |
-> | `MokoStandards-Template-Dolibarr` | PascalCase module class name (e.g. `MyModule`) — from the `src/core/modules/mod*.class.php` filename |
-> | `500000` | The `$this->numero` value in `src/core/modules/mod*.class.php`; check [module-registry.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/development/crm/module-registry.md) if creating a new module |
-> | `PHP` | Primary programming language (usually `PHP`) |
->
-> ---
-
-# MokoStandards-Template-Dolibarr — GitHub Copilot Custom Instructions
+# MokoDoliDymo — GitHub Copilot Custom Instructions
 
 ## What This Repo Is
 
 This is a **Moko Consulting MokoCRM** (Dolibarr) module repository governed by [MokoStandards](https://github.com/mokoconsulting-tech/MokoStandards). All coding standards, workflows, and policies are defined there and enforced here via bulk sync.
 
-Repository URL: https://github.com/mokoconsulting-tech/MokoStandards-Template-Dolibarr
-Module name: **mokostandardstemplatedolibarr**
-Module class: **MokoStandards-Template-Dolibarr**
-Module ID: **500000**
+Repository URL: https://github.com/mokoconsulting-tech/MokoDoliDymo
+Module name: **mokodolidymo**
+Module class: **MokoDoliDymo**
+Module ID: **185072**
 Platform: **Dolibarr / MokoCRM**
 
 ---
@@ -60,9 +32,9 @@ Every new file needs a copyright header as its first content.
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
  * FILE INFORMATION
- * DEFGROUP: MokoStandards-Template-Dolibarr.Module
- * INGROUP: MokoStandards-Template-Dolibarr
- * REPO: https://github.com/mokoconsulting-tech/MokoStandards-Template-Dolibarr
+ * DEFGROUP: MokoDoliDymo.Module
+ * INGROUP: MokoDoliDymo
+ * REPO: https://github.com/mokoconsulting-tech/MokoDoliDymo
  * PATH: /src/path/to/file.php
  * VERSION: XX.YY.ZZ
  * BRIEF: One-line description of purpose
@@ -79,9 +51,9 @@ This file is part of a Moko Consulting project.
 SPDX-License-Identifier: GPL-3.0-or-later
 
 # FILE INFORMATION
-DEFGROUP: MokoStandards-Template-Dolibarr.Documentation
-INGROUP: MokoStandards-Template-Dolibarr
-REPO: https://github.com/mokoconsulting-tech/MokoStandards-Template-Dolibarr
+DEFGROUP: MokoDoliDymo.Documentation
+INGROUP: MokoDoliDymo
+REPO: https://github.com/mokoconsulting-tech/MokoDoliDymo
 PATH: /docs/file.md
 VERSION: XX.YY.ZZ
 BRIEF: One-line description
@@ -103,10 +75,10 @@ BRIEF: One-line description
 
 ### Dolibarr Module Version Alignment
 
-The version in `README.md` **must always match** the `$this->version` property in the main module descriptor class (`src/core/modules/modMokoStandards-Template-Dolibarr.class.php`).
+The version in `README.md` **must always match** the `$this->version` property in the main module descriptor class (`src/core/modules/modMokoDoliDymo.class.php`).
 
 ```php
-// In src/core/modules/modMokoStandards-Template-Dolibarr.class.php
+// In src/core/modules/modMokoDoliDymo.class.php
 public $version = '01.02.04';  // Must match README.md version
 ```
 
@@ -115,18 +87,16 @@ public $version = '01.02.04';  // Must match README.md version
 ## Dolibarr Module Structure
 
 ```
-MokoStandards-Template-Dolibarr/
+MokoDoliDymo/
 ├── src/                          # Module source code (deployed to Dolibarr)
 │   ├── README.md                 # End-user documentation
 │   ├── core/
 │   │   └── modules/
-│   │       └── modMokoStandards-Template-Dolibarr.class.php   # Main module descriptor
+│   │       └── modMokoDoliDymo.class.php   # Main module descriptor
 │   ├── langs/
 │   │   └── en_US/
-│   │       └── mokostandardstemplatedolibarr.lang
+│   │       └── mokodolidymo.lang
 │   ├── sql/                      # Database schema
-│   │   ├── llx_mokostandardstemplatedolibarr.sql
-│   │   └── llx_mokostandardstemplatedolibarr.key.sql
 │   ├── class/                    # PHP class files
 │   └── lib/                      # Library files
 ├── docs/                         # Technical documentation
@@ -147,16 +117,16 @@ MokoStandards-Template-Dolibarr/
 
 ## Module Descriptor Class Pattern
 
-The main module descriptor (`src/core/modules/modMokoStandards-Template-Dolibarr.class.php`) must follow this pattern:
+The main module descriptor (`src/core/modules/modMokoDoliDymo.class.php`) must follow this pattern:
 
 ```php
 <?php
 /* … file header … */
 
 /**
- * Description of module mokostandardstemplatedolibarr
+ * Description of module mokodolidymo
  */
-class modMokoStandards-Template-Dolibarr extends DolibarrModules
+class modMokoDoliDymo extends DolibarrModules
 {
     /**
      * Constructor
@@ -168,17 +138,17 @@ class modMokoStandards-Template-Dolibarr extends DolibarrModules
         global $langs, $conf;
 
         $this->db = $db;
-        $this->numero = 500000;          // Unique module ID — do not change
-        $this->rights_class = 'mokostandardstemplatedolibarr';
+        $this->numero = 185072;          // Unique module ID — do not change
+        $this->rights_class = 'mokodolidymo';
         $this->family = 'crm';
         $this->module_position = '50';
         $this->name = preg_replace('/^mod/i', '', get_class($this));
-        $this->description = 'Description of mokostandardstemplatedolibarr module';
+        $this->description = 'Description of mokodolidymo module';
         $this->version = 'XX.YY.ZZ';           // Must match README.md version
         $this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
         $this->picto = 'object_favicon_256.png@mokocrm';
         $this->editor_name = 'Moko Consulting';
-        $this->editor_url = 'https://mokoconsulting.tech';		// Must be an external online web site
+        $this->editor_url = 'https://mokoconsulting.tech';
         $this->editor_squarred_logo = 'object_favicon_256.png@mokocrm';
     }
 }

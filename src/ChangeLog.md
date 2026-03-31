@@ -1,5 +1,5 @@
-# CHANGELOG MODULE SAMPLE FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
+# CHANGELOG MODULE MOKODOLIDYMO FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
 
-## 1.0
+## 01.00.00
 
-Initial version
+Initial version — module scaffolding for DYMO LabelWriter label design and printing.

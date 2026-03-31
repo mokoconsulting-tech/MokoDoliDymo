@@ -126,8 +126,8 @@ We welcome code contributions! Here's how:
 
 1. **Fork and clone the repository:**
    ```bash
-   git clone https://github.com/YOUR-USERNAME/MokoStandards-Template-Dolibarr.git
-   cd MokoStandards-Template-Dolibarr
+   git clone https://github.com/YOUR-USERNAME/MokoDoliDymo.git
+   cd MokoDoliDymo
    ```
 
 2. **Create a feature branch:**

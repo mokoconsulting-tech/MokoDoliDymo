@@ -19,7 +19,7 @@ The MokoConsulting Tech team takes security vulnerabilities seriously. We apprec
 Instead, please report security vulnerabilities by:
 
 1. **Email**: Send an email to security@mokoconsulting.tech (or create a private security advisory on GitHub)
-2. **Subject**: Use the subject line "Security Vulnerability Report: MokoStandards-Template-Dolibarr"
+2. **Subject**: Use the subject line "Security Vulnerability Report: MokoDoliDymo"
 
 ### What to Include
 
