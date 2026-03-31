@@ -127,10 +127,11 @@ class modMokoDoliDymo extends DolibarrModules
 		$this->cronjobs = array();
 		/* END MODULEBUILDER CRON */
 
-		// Permissions
+		// Permissions — granular access control
 		$this->rights = array();
 		$r = 0;
 		/* BEGIN MODULEBUILDER PERMISSIONS */
+		// Label template permissions
 		$o = 1;
 		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 1);
 		$this->rights[$r][1] = 'Read label templates';
@@ -138,19 +139,53 @@ class modMokoDoliDymo extends DolibarrModules
 		$this->rights[$r][5] = 'read';
 		$r++;
 		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 2);
-		$this->rights[$r][1] = 'Create/Update label templates';
+		$this->rights[$r][1] = 'Create label templates';
+		$this->rights[$r][4] = 'label';
+		$this->rights[$r][5] = 'create';
+		$r++;
+		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 3);
+		$this->rights[$r][1] = 'Modify label templates';
 		$this->rights[$r][4] = 'label';
 		$this->rights[$r][5] = 'write';
 		$r++;
-		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 3);
+		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 4);
 		$this->rights[$r][1] = 'Delete label templates';
 		$this->rights[$r][4] = 'label';
 		$this->rights[$r][5] = 'delete';
 		$r++;
-		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 4);
+		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 5);
+		$this->rights[$r][1] = 'Use label designer';
+		$this->rights[$r][4] = 'designer';
+		$this->rights[$r][5] = 'use';
+		$r++;
+		// Print permissions
+		$o = 2;
+		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 1);
 		$this->rights[$r][1] = 'Print labels';
 		$this->rights[$r][4] = 'label';
 		$this->rights[$r][5] = 'print';
+		$r++;
+		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 2);
+		$this->rights[$r][1] = 'Print labels via DYMO';
+		$this->rights[$r][4] = 'print';
+		$this->rights[$r][5] = 'dymo';
+		$r++;
+		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 3);
+		$this->rights[$r][1] = 'Export labels as PDF';
+		$this->rights[$r][4] = 'print';
+		$this->rights[$r][5] = 'pdf';
+		$r++;
+		// Import permissions
+		$o = 3;
+		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 1);
+		$this->rights[$r][1] = 'Import DYMO label files';
+		$this->rights[$r][4] = 'import';
+		$this->rights[$r][5] = 'dymo';
+		$r++;
+		$this->rights[$r][0] = $this->numero . sprintf("%02d", ($o * 10) + 2);
+		$this->rights[$r][1] = 'Import ODT label files';
+		$this->rights[$r][4] = 'import';
+		$this->rights[$r][5] = 'odt';
 		$r++;
 		/* END MODULEBUILDER PERMISSIONS */
 
@@ -176,6 +211,49 @@ class modMokoDoliDymo extends DolibarrModules
 		/* END MODULEBUILDER TOPMENU */
 
 		/* BEGIN MODULEBUILDER LEFTMENU LABEL */
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=mokodolidymo',
+			'type' => 'left',
+			'titre' => 'LabelTemplates',
+			'prefix' => img_picto('', 'fa-tags', 'class="pictofixedwidth valignmiddle paddingright"'),
+			'mainmenu' => 'mokodolidymo',
+			'leftmenu' => 'mokodolidymo_labels',
+			'url' => '/mokodolidymo/label_list.php',
+			'langs' => 'mokodolidymo@mokodolidymo',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("mokodolidymo")',
+			'perms' => '$user->hasRight("mokodolidymo", "label", "read")',
+			'target' => '',
+			'user' => 2,
+		);
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=mokodolidymo,fk_leftmenu=mokodolidymo_labels',
+			'type' => 'left',
+			'titre' => 'NewLabelTemplate',
+			'mainmenu' => 'mokodolidymo',
+			'leftmenu' => 'mokodolidymo_label_new',
+			'url' => '/mokodolidymo/label_card.php?action=create',
+			'langs' => 'mokodolidymo@mokodolidymo',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("mokodolidymo")',
+			'perms' => '$user->hasRight("mokodolidymo", "label", "create")',
+			'target' => '',
+			'user' => 2,
+		);
+		$this->menu[$r++] = array(
+			'fk_menu' => 'fk_mainmenu=mokodolidymo,fk_leftmenu=mokodolidymo_labels',
+			'type' => 'left',
+			'titre' => 'List',
+			'mainmenu' => 'mokodolidymo',
+			'leftmenu' => 'mokodolidymo_label_list',
+			'url' => '/mokodolidymo/label_list.php',
+			'langs' => 'mokodolidymo@mokodolidymo',
+			'position' => 1000 + $r,
+			'enabled' => 'isModEnabled("mokodolidymo")',
+			'perms' => '$user->hasRight("mokodolidymo", "label", "read")',
+			'target' => '',
+			'user' => 2,
+		);
 		/* END MODULEBUILDER LEFTMENU LABEL */
 
 		/* BEGIN MODULEBUILDER EXPORT LABEL */

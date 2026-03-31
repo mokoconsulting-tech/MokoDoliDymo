@@ -50,3 +50,36 @@ function mokodolidymoAdminPrepareHead()
 
 	return $head;
 }
+
+/**
+ * Prepare label template card tabs
+ *
+ * @param  LabelTemplate $object Label template object
+ * @return array                  Tabs array
+ */
+function mokodolidymoLabelPrepareHead($object)
+{
+	global $langs, $conf;
+
+	$langs->load("mokodolidymo@mokodolidymo");
+
+	$h = 0;
+	$head = array();
+
+	$head[$h][0] = dol_buildpath("/mokodolidymo/label_card.php", 1).'?id='.$object->id;
+	$head[$h][1] = $langs->trans("LabelTemplate");
+	$head[$h][2] = 'card';
+	$h++;
+
+	$head[$h][0] = dol_buildpath("/mokodolidymo/label_designer.php", 1).'?id='.$object->id;
+	$head[$h][1] = 'Designer';
+	$head[$h][2] = 'designer';
+	$h++;
+
+	$head[$h][0] = dol_buildpath("/mokodolidymo/label_print.php", 1).'?id='.$object->id;
+	$head[$h][1] = $langs->trans("PrintLabel");
+	$head[$h][2] = 'print';
+	$h++;
+
+	return $head;
+}

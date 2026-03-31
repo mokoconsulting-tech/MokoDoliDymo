@@ -29,6 +29,7 @@ secrets/
 *.pid
 *.seed
 *.sql
+!src/sql/*.sql
 *.sql.gz
 *.sqlite
 *.sqlite3

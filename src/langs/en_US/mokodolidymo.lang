@@ -3,12 +3,8 @@
 #
 # Generic
 #
-
-# Module label 'ModuleMokoDoliDymoName'
 ModuleMokoDoliDymoName = MokoDoliDymo
-# Module description 'ModuleMokoDoliDymoDesc'
 ModuleMokoDoliDymoDesc = Design and print labels for DYMO LabelWriter label makers
-# Module long description 'ModuleMokoDoliDymoDescLong'
 ModuleMokoDoliDymoDescLong = A Dolibarr module for designing, managing, and printing labels using DYMO LabelWriter thermal label printers. Create label templates with product data, barcodes, addresses, and custom fields from your Dolibarr records.
 
 #
@@ -26,22 +22,59 @@ MokoDoliDymoAbout = About MokoDoliDymo
 MokoDoliDymoAboutPage = MokoDoliDymo about page
 
 #
-# Label designer page
+# Home / Index
 #
 MokoDoliDymoArea = MokoDoliDymo - Label Designer
-MyPageName = Label Designer
 
 #
-# Labels
+# Label templates
 #
 LabelTemplate = Label Template
 LabelTemplates = Label Templates
 NewLabelTemplate = New Label Template
 EditLabelTemplate = Edit Label Template
 DeleteLabelTemplate = Delete Label Template
-PrintLabel = Print Label
-PrintLabels = Print Labels
+ConfirmDelete = Are you sure you want to delete this label template?
+LabelSize = Label Size
 LabelWidth = Label Width
 LabelHeight = Label Height
-LabelSize = Label Size
 LabelPreview = Label Preview
+ObjectType = Data Source
+Source = Source
+
+#
+# Designer
+#
+Designer = Designer
+OpenDesigner = Open Designer
+SaveLayout = Save Layout
+
+#
+# Printing
+#
+PrintLabel = Print Label
+PrintLabels = Print Labels
+PrintViaDymo = Print via DYMO
+DownloadPdf = Download as PDF
+SelectRecords = Select Records
+ReadyToPrint = Ready to Print
+
+#
+# Permissions
+#
+Permission18507211 = Read label templates
+Permission18507212 = Create label templates
+Permission18507213 = Modify label templates
+Permission18507214 = Delete label templates
+Permission18507215 = Use label designer
+Permission18507221 = Print labels
+Permission18507222 = Print labels via DYMO
+Permission18507223 = Export labels as PDF
+Permission18507231 = Import DYMO label files
+Permission18507232 = Import ODT label files
+
+#
+# Status
+#
+Draft = Draft
+Active = Active
