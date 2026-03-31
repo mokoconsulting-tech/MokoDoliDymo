@@ -148,6 +148,28 @@ class LabelTemplate extends CommonObject
 			'shipment.date_delivery' => 'Delivery Date',
 			'shipment.weight' => 'Weight',
 		),
+		'warehouse' => array(
+			'warehouse.ref' => 'Warehouse Ref',
+			'warehouse.label' => 'Warehouse Name',
+			'warehouse.lieu' => 'Location / Address',
+			'warehouse.description' => 'Description',
+			'warehouse.barcode' => 'Barcode',
+		),
+		'member' => array(
+			'member.ref' => 'Member Ref',
+			'member.firstname' => 'First Name',
+			'member.lastname' => 'Last Name',
+			'member.login' => 'Login',
+			'member.email' => 'Email',
+			'member.phone' => 'Phone',
+			'member.address' => 'Address',
+			'member.zip' => 'Zip Code',
+			'member.town' => 'City',
+			'member.country' => 'Country',
+			'member.photo' => 'Member Photo',
+			'member.type' => 'Member Type',
+			'member.datefin' => 'End of Subscription',
+		),
 	);
 
 	/**

@@ -15,6 +15,21 @@ Settings = Settings
 MokoDoliDymoSetupPage = MokoDoliDymo setup page
 
 #
+# Setup parameters
+#
+MOKODOLIDYMO_SECTION_DYMO = DYMO Connect Settings
+MOKODOLIDYMO_DYMO_PORT = DYMO Connect Port
+MOKODOLIDYMO_DEFAULT_PRINTER = Default Printer Name
+MOKODOLIDYMO_SECTION_DEFAULTS = Label Defaults
+MOKODOLIDYMO_DEFAULT_LABEL_SIZE = Default Label Size
+MOKODOLIDYMO_DEFAULT_OBJECT_TYPE = Default Data Source
+MOKODOLIDYMO_SECTION_PRINT = Printing Options
+MOKODOLIDYMO_AUTO_PRINT = Auto-print (skip preview)
+MOKODOLIDYMO_SHOW_ON_PRODUCT = Show Print button on product cards
+MOKODOLIDYMO_SHOW_ON_THIRDPARTY = Show Print button on third party cards
+MOKODOLIDYMO_SHOW_ON_CONTACT = Show Print button on contact cards
+
+#
 # About page
 #
 About = About
@@ -41,6 +56,7 @@ LabelHeight = Label Height
 LabelPreview = Label Preview
 ObjectType = Data Source
 Source = Source
+Labels = Labels
 
 #
 # Designer

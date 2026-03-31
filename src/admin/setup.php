@@ -90,8 +90,70 @@ if (!class_exists('FormSetup')) {
 $formSetup = new FormSetup($db);
 
 
-// Enter here all parameters in your setup page
+// ── DYMO Connect Settings ─────────────────────────────────
 
+$formSetup->newItem('MOKODOLIDYMO_SECTION_DYMO')->setAsTitle();
+
+// DYMO Connect service port
+$item = $formSetup->newItem('MOKODOLIDYMO_DYMO_PORT');
+$item->defaultFieldValue = '41951';
+$item->fieldAttr['placeholder'] = '41951';
+$item->helpText = 'Port number for the DYMO Connect local service (default: 41951)';
+$item->cssClass = 'maxwidth150';
+
+// Default printer name
+$item = $formSetup->newItem('MOKODOLIDYMO_DEFAULT_PRINTER');
+$item->defaultFieldValue = '';
+$item->fieldAttr['placeholder'] = 'DYMO LabelWriter 450';
+$item->helpText = 'Name of the default DYMO printer (leave empty to prompt each time)';
+$item->cssClass = 'minwidth300';
+
+// ── Label Defaults ────────────────────────────────────────
+
+$formSetup->newItem('MOKODOLIDYMO_SECTION_DEFAULTS')->setAsTitle();
+
+// Default label size for new templates
+$label_sizes = array(
+	'30252' => '30252 - Address (88.9x28.6mm)',
+	'30256' => '30256 - Shipping (101.6x58.7mm)',
+	'30334' => '30334 - Multi-purpose (57.2x25.4mm)',
+	'30327' => '30327 - File Folder (87.3x14.3mm)',
+	'30857' => '30857 - Name Badge (101.6x57.2mm)',
+	'30336' => '30336 - Small Multi-purpose (25.4x25.4mm)',
+	'99012' => '99012 - Large Address (89x36mm)',
+	'custom' => 'Custom Size',
+);
+$item = $formSetup->newItem('MOKODOLIDYMO_DEFAULT_LABEL_SIZE');
+$item->setAsSelect($label_sizes);
+$item->helpText = 'Default label size when creating new templates';
+
+// Default object type for new templates
+$item = $formSetup->newItem('MOKODOLIDYMO_DEFAULT_OBJECT_TYPE');
+$item->setAsSelect(array(
+	'product' => 'Product',
+	'thirdparty' => 'Third Party',
+	'contact' => 'Contact',
+	'shipment' => 'Shipment',
+	'member' => 'Member',
+	'warehouse' => 'Warehouse / Stock',
+));
+$item->helpText = 'Default data source when creating new templates';
+
+// ── Printing Options ──────────────────────────────────────
+
+$formSetup->newItem('MOKODOLIDYMO_SECTION_PRINT')->setAsTitle();
+
+// Auto-print (skip preview)
+$formSetup->newItem('MOKODOLIDYMO_AUTO_PRINT')->setAsYesNo();
+
+// Show print button on product cards
+$formSetup->newItem('MOKODOLIDYMO_SHOW_ON_PRODUCT')->setAsYesNo();
+
+// Show print button on thirdparty cards
+$formSetup->newItem('MOKODOLIDYMO_SHOW_ON_THIRDPARTY')->setAsYesNo();
+
+// Show print button on contact cards
+$formSetup->newItem('MOKODOLIDYMO_SHOW_ON_CONTACT')->setAsYesNo();
 
 $setupnotempty += count($formSetup->items);
 

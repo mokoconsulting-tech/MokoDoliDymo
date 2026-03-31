@@ -82,7 +82,17 @@ class modMokoDoliDymo extends DolibarrModules
 			'css' => array(),
 			'js' => array(),
 			/* BEGIN MODULEBUILDER HOOKSCONTEXTS */
-			'hooks' => array(),
+			'hooks' => array(
+				'data' => array(
+					'productcard',
+					'thirdpartycard',
+					'contactcard',
+					'expeditioncard',
+					'deliverycard',
+					'membercard',
+					'stockcard',
+				),
+			),
 			/* END MODULEBUILDER HOOKSCONTEXTS */
 			'moduleforexternal' => 0,
 			'websitetemplates' => 0,
@@ -112,7 +122,12 @@ class modMokoDoliDymo extends DolibarrModules
 		}
 
 		/* BEGIN MODULEBUILDER TABS */
-		$this->tabs = array();
+		$this->tabs = array(
+			'product:+mokodolidymo:Labels:mokodolidymo@mokodolidymo:$user->hasRight(\'mokodolidymo\', \'label\', \'read\'):/mokodolidymo/label_object_tab.php?object_type=product&fk_object=__ID__',
+			'thirdparty:+mokodolidymo:Labels:mokodolidymo@mokodolidymo:$user->hasRight(\'mokodolidymo\', \'label\', \'read\'):/mokodolidymo/label_object_tab.php?object_type=thirdparty&fk_object=__ID__',
+			'contact:+mokodolidymo:Labels:mokodolidymo@mokodolidymo:$user->hasRight(\'mokodolidymo\', \'label\', \'read\'):/mokodolidymo/label_object_tab.php?object_type=contact&fk_object=__ID__',
+			'member:+mokodolidymo:Labels:mokodolidymo@mokodolidymo:$user->hasRight(\'mokodolidymo\', \'label\', \'read\'):/mokodolidymo/label_object_tab.php?object_type=member&fk_object=__ID__',
+		);
 		/* END MODULEBUILDER TABS */
 
 		/* BEGIN MODULEBUILDER DICTIONARIES */

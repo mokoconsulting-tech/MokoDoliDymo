@@ -100,6 +100,16 @@ if (!empty($selected_ids)) {
 				$source_obj = new Contact($db);
 				$source_obj->fetch($rec_id);
 				break;
+			case 'warehouse':
+				require_once DOL_DOCUMENT_ROOT.'/product/stock/class/entrepot.class.php';
+				$source_obj = new Entrepot($db);
+				$source_obj->fetch($rec_id);
+				break;
+			case 'member':
+				require_once DOL_DOCUMENT_ROOT.'/adherents/class/adherent.class.php';
+				$source_obj = new Adherent($db);
+				$source_obj->fetch($rec_id);
+				break;
 		}
 
 		if ($source_obj && $source_obj->id > 0) {
@@ -165,6 +175,14 @@ switch ($object_type) {
 	case 'contact':
 		require_once DOL_DOCUMENT_ROOT.'/contact/class/contact.class.php';
 		$sql = "SELECT rowid, CONCAT(lastname, ' ', firstname) as ref, '' as label FROM ".$db->prefix()."socpeople WHERE entity = ".((int) $conf->entity)." ORDER BY tms DESC LIMIT 50";
+		break;
+	case 'warehouse':
+		require_once DOL_DOCUMENT_ROOT.'/product/stock/class/entrepot.class.php';
+		$sql = "SELECT rowid, ref, label FROM ".$db->prefix()."entrepot WHERE entity = ".((int) $conf->entity)." ORDER BY tms DESC LIMIT 50";
+		break;
+	case 'member':
+		require_once DOL_DOCUMENT_ROOT.'/adherents/class/adherent.class.php';
+		$sql = "SELECT rowid, CONCAT(lastname, ' ', firstname) as ref, login as label FROM ".$db->prefix()."adherent WHERE entity = ".((int) $conf->entity)." ORDER BY tms DESC LIMIT 50";
 		break;
 	default:
 		$sql = '';
