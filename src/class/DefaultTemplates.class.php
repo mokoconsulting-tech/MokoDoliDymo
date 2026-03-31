@@ -333,11 +333,13 @@ class DefaultTemplates
 	 * Layout:
 	 *   ┌──────────────────────────────────────┐
 	 *   │ [LOGO]  Company Name                 │
-	 *   │─────────────────────────────────────  │
-	 *   │  Product Ref          Label Short Text│
-	 *   │  Product Label (large, bold)          │
-	 *   │  ||||||||||||||||||||||||              │
-	 *   │  barcode              Price           │
+	 *   │──────────────────────────────────────│
+	 *   │  PROD-REF                            │
+	 *   │  Product Name (bold)                 │
+	 *   │  Label text paragraph — a few        │
+	 *   │  sentences of product description    │
+	 *   │  ||||||||||||||||||||   $24.99        │
+	 *   │  barcode                             │
 	 *   └──────────────────────────────────────┘
 	 */
 	private static function productLargeWithLogo()
@@ -358,8 +360,8 @@ class DefaultTemplates
 						'type' => 'image',
 						'x' => 3,
 						'y' => 2,
-						'width' => 18,
-						'height' => 12,
+						'width' => 15,
+						'height' => 10,
 						'properties' => array(
 							'src' => '',
 							'fit' => 'contain',
@@ -370,13 +372,13 @@ class DefaultTemplates
 					array(
 						'id' => 'elem_2',
 						'type' => 'text',
-						'x' => 23,
+						'x' => 20,
 						'y' => 3,
-						'width' => 75,
-						'height' => 6,
+						'width' => 78,
+						'height' => 5,
 						'properties' => array(
 							'text' => '',
-							'fontSize' => 10,
+							'fontSize' => 9,
 							'fontWeight' => 'bold',
 							'textAlign' => 'left',
 							'binding' => 'static.company',
@@ -387,7 +389,7 @@ class DefaultTemplates
 						'id' => 'elem_3',
 						'type' => 'line',
 						'x' => 3,
-						'y' => 16,
+						'y' => 14,
 						'width' => 95,
 						'height' => 0.5,
 						'properties' => array(
@@ -396,52 +398,52 @@ class DefaultTemplates
 							'color' => '#000000',
 						),
 					),
-					// Product ref (left side, below divider)
+					// Product ref (left)
 					array(
 						'id' => 'elem_4',
 						'type' => 'text',
 						'x' => 3,
-						'y' => 18,
-						'width' => 40,
-						'height' => 5,
+						'y' => 16,
+						'width' => 30,
+						'height' => 4,
 						'properties' => array(
 							'text' => '',
-							'fontSize' => 8,
+							'fontSize' => 7,
 							'fontWeight' => 'normal',
 							'textAlign' => 'left',
 							'binding' => 'product.ref',
 						),
 					),
-					// Label short text (right side, below divider)
+					// Product name (bold)
 					array(
 						'id' => 'elem_5',
 						'type' => 'text',
-						'x' => 50,
-						'y' => 18,
-						'width' => 48,
-						'height' => 5,
+						'x' => 3,
+						'y' => 20,
+						'width' => 95,
+						'height' => 7,
 						'properties' => array(
 							'text' => '',
-							'fontSize' => 8,
-							'fontWeight' => 'normal',
-							'textAlign' => 'right',
-							'binding' => 'extra.mokodolidymo_label_text',
+							'fontSize' => 12,
+							'fontWeight' => 'bold',
+							'textAlign' => 'left',
+							'binding' => 'product.label',
 						),
 					),
-					// Product label / name (large, bold, center section)
+					// Label text paragraph
 					array(
 						'id' => 'elem_6',
 						'type' => 'text',
 						'x' => 3,
-						'y' => 24,
+						'y' => 28,
 						'width' => 95,
-						'height' => 9,
+						'height' => 12,
 						'properties' => array(
 							'text' => '',
-							'fontSize' => 16,
-							'fontWeight' => 'bold',
+							'fontSize' => 7,
+							'fontWeight' => 'normal',
 							'textAlign' => 'left',
-							'binding' => 'product.label',
+							'binding' => 'extra.mokodolidymo_label_text',
 						),
 					),
 					// Barcode (bottom-left)
@@ -449,9 +451,9 @@ class DefaultTemplates
 						'id' => 'elem_7',
 						'type' => 'barcode',
 						'x' => 3,
-						'y' => 35,
-						'width' => 55,
-						'height' => 16,
+						'y' => 42,
+						'width' => 50,
+						'height' => 12,
 						'properties' => array(
 							'data' => '',
 							'format' => 'CODE128',
@@ -463,13 +465,13 @@ class DefaultTemplates
 					array(
 						'id' => 'elem_8',
 						'type' => 'text',
-						'x' => 62,
-						'y' => 38,
-						'width' => 36,
-						'height' => 14,
+						'x' => 58,
+						'y' => 42,
+						'width' => 40,
+						'height' => 12,
 						'properties' => array(
 							'text' => '',
-							'fontSize' => 24,
+							'fontSize' => 22,
 							'fontWeight' => 'bold',
 							'textAlign' => 'right',
 							'binding' => 'product.price_ttc',

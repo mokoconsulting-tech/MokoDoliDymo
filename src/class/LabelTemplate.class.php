@@ -118,7 +118,7 @@ class LabelTemplate extends CommonObject
 			'product.description' => 'Description',
 			'product.note_public' => 'Public Note',
 			'product.fk_barcode_type' => 'Barcode Type',
-			'extra.mokodolidymo_label_text' => 'Label Short Text',
+			'extra.mokodolidymo_label_text' => 'Label Text',
 		),
 		'thirdparty' => array(
 			'thirdparty.nom' => 'Company Name',

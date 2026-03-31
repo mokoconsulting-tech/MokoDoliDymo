@@ -288,13 +288,13 @@ class modMokoDoliDymo extends DolibarrModules
 		if ($init_result > 0) {
 			include_once DOL_DOCUMENT_ROOT.'/core/class/extrafields.class.php';
 			$extrafields = new ExtraFields($this->db);
-			// "Label Short Text" — a short text field on products for custom label content
+			// "Label Text" — paragraph-length field on products for label content (max 500 chars)
 			$extrafields->addExtraField(
 				'mokodolidymo_label_text',     // attr name
-				'Label Short Text',            // label
+				'Label Text',                  // label
 				'varchar',                     // type
 				100,                           // position
-				128,                           // size
+				500,                           // size (max 500 chars — fits ~3-4 sentences on a label)
 				'product',                     // element type
 				0,                             // unique
 				0,                             // required
