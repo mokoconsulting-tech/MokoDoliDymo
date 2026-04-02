@@ -1,361 +1,128 @@
-# Contributing to MokoStandards Dolibarr Template
+<!--
+ Copyright (C) 2026 Moko Consulting <hello@mokoconsulting.tech>
 
-Thank you for your interest in contributing to this Dolibarr module template! This document provides guidelines and instructions for contributing.
+ This file is part of a Moko Consulting project.
 
-## Table of Contents
+ SPDX-License-Identifier: GPL-3.0-or-later
 
-- [Code of Conduct](#code-of-conduct)
-- [How Can I Contribute?](#how-can-i-contribute)
-- [Development Setup](#development-setup)
-- [Coding Standards](#coding-standards)
-- [Commit Guidelines](#commit-guidelines)
-- [Pull Request Process](#pull-request-process)
-- [Documentation](#documentation)
+ This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
-## Code of Conduct
+ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the IMPLIED WARRANTY of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-This project adheres to the Contributor Covenant [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+ You should have received a copy of the GNU General Public License (./LICENSE).
 
-### Our Standards
+ # FILE INFORMATION
+ DEFGROUP: {{DEFGROUP}}
+ INGROUP: Project.Documentation
+ REPO: https://github.com/mokoconsulting-tech/MokoDoliDymo
+ VERSION: 04.04.00
+ PATH: ./CONTRIBUTING.md
+ BRIEF: How to contribute; branch strategy, commit conventions, PR workflow, and release pipeline
+ -->
 
-- Be respectful and inclusive
-- Welcome newcomers and help them learn
-- Focus on what is best for the community
-- Show empathy towards other community members
+# Contributing
 
-### Unacceptable Behavior
+Thank you for your interest in contributing to **MokoDoliDymo**!
 
-- Harassment, discrimination, or offensive comments
-- Trolling or insulting/derogatory comments
-- Public or private harassment
-- Publishing others' private information
+This repository is governed by **[MokoStandards](https://github.com/mokoconsulting-tech/MokoStandards)** — the authoritative source of coding standards, workflows, and policies for all Moko Consulting repositories.
 
-## How Can I Contribute?
+## Branch Strategy
 
-### Reporting Bugs
+| Branch | Purpose | Deploys To |
+|--------|---------|------------|
+| `main` | Bleeding edge — all development merges here | CI only |
+| `dev/XX.YY.ZZ` | Feature development | Dev server (version: "development") |
+| `version/XX.YY` | Stable frozen snapshot | Demo + RS servers |
 
-Before creating bug reports, please check existing issues. When creating a bug report, include:
+### Development Workflow
 
-- **Clear title and description**
-- **Steps to reproduce** the issue
-- **Expected behavior** vs actual behavior
-- **Screenshots** if applicable
-- **Environment details** (Dolibarr version, PHP version, etc.)
-
-**Bug Report Template:**
-```markdown
-## Bug Description
-A clear description of the bug.
-
-## Steps to Reproduce
-1. Go to '...'
-2. Click on '....'
-3. See error
-
-## Expected Behavior
-What you expected to happen.
-
-## Actual Behavior
-What actually happened.
-
-## Environment
-- Dolibarr Version: [e.g., 16.0]
-- PHP Version: [e.g., 8.1]
-- Database: [e.g., MySQL 8.0]
-- OS: [e.g., Ubuntu 22.04]
-
-## Additional Context
-Any other information about the problem.
+```
+1. Create branch:   git checkout -b dev/XX.YY.ZZ/my-feature
+2. Develop + test    (dev server auto-deploys on push)
+3. Open PR → main    (squash merge only)
+4. Auto-release      (version branch + tag + GitHub Release created automatically)
 ```
 
-### Suggesting Enhancements
+### Branch Naming
 
-Enhancement suggestions are welcome! Please provide:
+| Prefix | Use |
+|--------|-----|
+| `dev/XX.YY.ZZ` | Feature development (e.g., `dev/02.00.00/add-extrafields`) |
+| `version/XX.YY` | Stable release (auto-created, never manually pushed) |
+| `chore/` | Automated sync branches (managed by MokoStandards) |
 
-- **Clear use case** for the enhancement
-- **Detailed description** of the proposed functionality
-- **Mockups or examples** if applicable
-- **Alternatives considered**
+> **Never use** `feature/`, `hotfix/`, or `release/` prefixes — they are not part of the MokoStandards branch strategy.
 
-**Enhancement Template:**
-```markdown
-## Enhancement Description
-Clear description of the enhancement.
+## Commit Conventions
 
-## Use Case
-Who would benefit and how?
+Use [conventional commits](https://www.conventionalcommits.org/):
 
-## Proposed Solution
-How should this work?
-
-## Alternatives Considered
-What other solutions did you consider?
-
-## Additional Context
-Any other relevant information.
+```
+feat(scope): add new extrafield for invoice tracking
+fix(sql): correct column type in llx_mytable
+docs(readme): update installation instructions
+chore(deps): bump enterprise library to 04.02.30
 ```
 
-### Requesting Module IDs
+**Valid types:** `feat` | `fix` | `docs` | `chore` | `ci` | `refactor` | `style` | `test` | `perf` | `revert` | `build`
 
-To request an official module ID:
+## Pull Request Workflow
 
-1. Create an issue using the title format: "Request Module ID Assignment: [Module Name]"
-2. Provide all required information (see [Module ID Policy](docs/module-id-policy.md))
-3. Wait for maintainer review and assignment
+1. **Branch** from `main` using `dev/XX.YY.ZZ/description` format
+2. **Bump** the patch version in `README.md` before opening the PR
+3. **Title** must be a valid conventional commit subject line
+4. **Target** `main` — squash merge only (merge commits are disabled)
+5. **CI checks** must pass before merge
 
-### Contributing Code
+### What Happens on Merge
 
-We welcome code contributions! Here's how:
+When your PR is merged to `main`, these workflows run automatically:
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## Development Setup
-
-### Prerequisites
-
-- Dolibarr 12.0 or higher
-- PHP 7.4 or higher
-- Git
-- Text editor or IDE
-
-### Setup Steps
-
-1. **Fork and clone the repository:**
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/MokoDoliDymo.git
-   cd MokoDoliDymo
-   ```
-
-2. **Create a feature branch:**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-3. **Install in Dolibarr** (for testing):
-   ```bash
-   ln -s /path/to/your/clone /path/to/dolibarr/htdocs/custom/testmodule
-   ```
-
-4. **Make your changes** and test thoroughly
+1. **sync-version-on-merge** — auto-bumps patch version, propagates to all file headers
+2. **auto-release** — creates `version/XX.YY` branch, git tag, and GitHub Release
+3. **deploy-demo / deploy-rs** — deploys to demo and RS servers (if `src/**` changed)
 
 ## Coding Standards
 
-### PHP Standards
+All contributions must follow [MokoStandards](https://github.com/mokoconsulting-tech/MokoStandards):
 
-Follow Dolibarr coding standards:
+| Standard | Reference |
+|----------|-----------|
+| Coding Style | [coding-style-guide.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/policy/coding-style-guide.md) |
+| File Headers | [file-header-standards.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/policy/file-header-standards.md) |
+| Branching | [branch-release-strategy.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/policy/branch-release-strategy.md) |
+| Merge Strategy | [merge-strategy.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/policy/merge-strategy.md) |
+| Scripting | [scripting-standards.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/policy/scripting-standards.md) |
+| Build & Release | [build-release.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/workflows/build-release.md) |
 
-- **Indentation**: Use tabs (4 spaces width)
-- **Line length**: Max 120 characters
-- **Naming conventions**:
-  - Classes: `PascalCase`
-  - Functions/Methods: `camelCase`
-  - Variables: `$snake_case` or `$camelCase`
-  - Constants: `UPPER_CASE`
+## PR Checklist
 
-### Documentation Standards
+- [ ] Branch named `dev/XX.YY.ZZ/description`
+- [ ] Patch version bumped in `README.md`
+- [ ] Conventional commit format for PR title
+- [ ] All new files have FILE INFORMATION headers
+- [ ] `declare(strict_types=1)` in all PHP files
+- [ ] PHPDoc on all public methods
+- [ ] Tests pass
+- [ ] CHANGELOG.md updated
+- [ ] No secrets, tokens, or credentials committed
 
-- Use PHPDoc format for all classes and functions
-- Include parameter types and return types
-- Add usage examples for complex functions
+## Custom Workflows
 
-Example:
-```php
-/**
- * Fetch object by ID
- *
- * @param  int    $id    Object ID
- * @return int           <0 if KO, >0 if OK
- */
-public function fetch($id)
-{
-    // Implementation
-}
-```
-
-### File Organization
-
-- One class per file
-- File names match class names
-- Use appropriate directories (class/, core/, lib/, etc.)
-
-### Security Best Practices
-
-- Always validate and sanitize inputs
-- Use prepared statements or proper escaping
-- Implement permission checks
-- Escape output to prevent XSS
-
-Example:
-```php
-// Input validation
-$id = GETPOST('id', 'int');
-$name = GETPOST('name', 'alpha');
-
-// Permission check
-if (!$user->rights->module->read) {
-    accessforbidden();
-}
-
-// Output escaping
-print dol_escape_htmltag($user_input);
-```
-
-## Commit Guidelines
-
-### Commit Message Format
-
-Use clear, descriptive commit messages:
+Place repo-specific workflows in `.github/workflows/custom/` — they are **never overwritten or deleted** by MokoStandards sync:
 
 ```
-<type>: <subject>
-
-<body>
-
-<footer>
+.github/workflows/
+├── deploy-dev.yml              ← Synced from MokoStandards
+├── auto-release.yml            ← Synced from MokoStandards
+└── custom/                     ← Your custom workflows (safe)
+    └── my-custom-ci.yml
 ```
-
-**Types:**
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation changes
-- `style`: Code style changes (formatting, etc.)
-- `refactor`: Code refactoring
-- `test`: Adding or updating tests
-- `chore`: Maintenance tasks
-
-**Examples:**
-```
-feat: Add user profile management feature
-
-Implement CRUD operations for user profiles including
-form validation and database integration.
-
-Closes #123
-```
-
-```
-fix: Resolve module activation issue
-
-Fix SQL syntax error preventing module activation
-on PostgreSQL databases.
-
-Fixes #456
-```
-
-### Best Practices
-
-- Keep commits atomic (one logical change per commit)
-- Write clear commit messages
-- Reference issue numbers when applicable
-- Test before committing
-
-## Pull Request Process
-
-### Before Submitting
-
-1. ✅ Update documentation if needed
-2. ✅ Add or update tests
-3. ✅ Ensure all tests pass
-4. ✅ Follow coding standards
-5. ✅ Update CHANGELOG.md
-6. ✅ Rebase on latest main branch
-
-### Submitting a Pull Request
-
-1. **Push your branch** to your fork:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-2. **Create pull request** on GitHub
-
-3. **Fill out the PR template:**
-   ```markdown
-   ## Description
-   Clear description of changes
-   
-   ## Type of Change
-   - [ ] Bug fix
-   - [ ] New feature
-   - [ ] Documentation update
-   - [ ] Code refactoring
-   
-   ## Testing
-   Describe testing performed
-   
-   ## Checklist
-   - [ ] Code follows project standards
-   - [ ] Documentation updated
-   - [ ] Tests added/updated
-   - [ ] CHANGELOG.md updated
-   
-   ## Related Issues
-   Closes #123
-   ```
-
-4. **Wait for review** and address feedback
-
-### Review Process
-
-- Maintainers will review your PR
-- Address any requested changes
-- Once approved, your PR will be merged
-
-### After Merge
-
-- Delete your feature branch
-- Pull latest changes from main
-- Update your fork
-
-## Documentation
-
-### What to Document
-
-- New features and functionality
-- Configuration options
-- API changes
-- Breaking changes
-- Usage examples
-
-### Where to Document
-
-- **README.md**: Overview and quick start
-- **docs/**: Detailed guides and references
-- **Code comments**: Inline documentation
-- **CHANGELOG.md**: Version history
-
-### Documentation Style
-
-- Use clear, simple language
-- Include code examples
-- Add screenshots for UI changes
-- Keep formatting consistent
-- Use proper markdown syntax
-
-## Questions?
-
-If you have questions:
-
-- Check existing documentation
-- Search closed issues
-- Create a new issue with the "question" label
-- Be specific and provide context
-
-## Recognition
-
-Contributors will be recognized in:
-- Repository contributors list
-- CHANGELOG.md for significant contributions
-- Project documentation as appropriate
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the same license as the project (MIT License - see [LICENSE](LICENSE) file).
+By contributing, you agree that your contributions will be licensed under the [GPL-3.0-or-later](LICENSE) license.
 
 ---
 
-Thank you for contributing to MokoStandards Dolibarr Template! Your efforts help make this template better for everyone.
+*This file is synced from [MokoStandards](https://github.com/mokoconsulting-tech/MokoStandards). Do not edit directly — changes will be overwritten on the next sync.*
