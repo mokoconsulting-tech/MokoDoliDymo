@@ -1,3 +1,31 @@
+> [!IMPORTANT]
+> **🔧 AI Self-Update Required on First Use**
+>
+> This file may contain unfilled `{{TOKEN}}` placeholders. The MokoStandards bulk-sync system
+> replaces them automatically at sync time; if you can still see them, sync has not yet run for
+> this repository — or this is a brand-new repo.
+>
+> **On your very first interaction in this repository, before answering any other question:**
+>
+> 1. Check whether any `{{TOKEN}}` placeholders remain in this file.
+> 2. If they do, locate the values as described in the table below and replace every occurrence
+>    in **both** `.github/copilot-instructions.md` and `.github/CLAUDE.md`.
+> 3. After replacing all tokens, **delete this entire notice block** (from `> [!IMPORTANT]`
+>    through the closing `> ---` line) in both files.
+> 4. Tell the developer: *"I've self-updated the AI context files with this repository's
+>    values — all set."*
+>
+> | Placeholder | Where to find the value |
+> |---|---|
+> | `MokoDoliDymo` | The GitHub repository name (visible in the URL, `README.md` heading, or `git remote -v`) |
+> | `https://github.com/mokoconsulting-tech/MokoDoliDymo` | Full GitHub URL, e.g. `https://github.com/mokoconsulting-tech/<repo-name>` |
+> | `mokodolidymo` | The module name as used in Dolibarr (lowercase, e.g. `mymodule`) — from the `langs/en_US/*.lang` filename or `$this->rights_class` in the module descriptor |
+> | `MokoDoliDymo` | PascalCase module class name (e.g. `MyModule`) — from the `src/core/modules/mod*.class.php` filename |
+> | `185072` | The `$this->numero` value in `src/core/modules/mod*.class.php`; check [module-registry.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/development/crm/module-registry.md) if creating a new module |
+> | `PHP` | Primary programming language (usually `PHP`) |
+>
+> ---
+
 # MokoDoliDymo — GitHub Copilot Custom Instructions
 
 ## What This Repo Is
@@ -77,10 +105,55 @@ BRIEF: One-line description
 
 The version in `README.md` **must always match** the `$this->version` property in the main module descriptor class (`src/core/modules/modMokoDoliDymo.class.php`).
 
+- On `dev/**` branches: `$this->version = 'development'` (set automatically by deploy-dev workflow)
+- On merge to main: `$this->version` is set to the real version by the auto-release workflow
+- **Never manually set `$this->version`** — the workflows handle it
+
+### Module Update Server (update.txt)
+
+Every Dolibarr module must wire up `$this->url_last_version` so the admin panel can check for updates.
+
+**In `src/core/modules/modMokoDoliDymo.class.php` constructor**, add:
+
 ```php
-// In src/core/modules/modMokoDoliDymo.class.php
-public $version = '01.02.04';  // Must match README.md version
+$this->version = 'development';
+$this->url_last_version = 'https://raw.githubusercontent.com/mokoconsulting-tech/MokoDoliDymo/main/update.txt';
 ```
+
+**How it works:**
+1. The `auto-release.yml` workflow writes `update.txt` to the repo root on every GitHub Release
+2. `update.txt` contains the latest version from `README.md`
+3. Dolibarr fetches `$this->url_last_version` and compares against the installed version
+
+**Add this method** to the module descriptor to parse the JSON response:
+
+```php
+public function getLatestVersion(): string
+{
+    if (empty($this->url_last_version)) {
+        return '';
+    }
+    $content = @file_get_contents($this->url_last_version);
+    if ($content === false) {
+        return '';
+    }
+    $data = json_decode($content, true);
+    return $data['version'] ?? '';
+}
+```
+
+**update.txt format** (auto-generated, do not edit manually):
+```json
+{
+  "version": "01.02.03",
+  "tag": "v01.02.03",
+  "repo": "mokoconsulting-tech/MokoDoliDymo",
+  "release_url": "https://github.com/mokoconsulting-tech/MokoDoliDymo/releases/tag/v01.02.03",
+  "updated": "2026-03-27T00:00:00Z"
+}
+```
+
+Full guide: [docs/guide/crm/dolibarr-update-check.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/guide/crm/dolibarr-update-check.md)
 
 ---
 
@@ -97,6 +170,8 @@ MokoDoliDymo/
 │   │   └── en_US/
 │   │       └── mokodolidymo.lang
 │   ├── sql/                      # Database schema
+│   │   ├── llx_mokodolidymo.sql
+│   │   └── llx_mokodolidymo.key.sql
 │   ├── class/                    # PHP class files
 │   └── lib/                      # Library files
 ├── docs/                         # Technical documentation
@@ -148,7 +223,7 @@ class modMokoDoliDymo extends DolibarrModules
         $this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
         $this->picto = 'object_favicon_256.png@mokocrm';
         $this->editor_name = 'Moko Consulting';
-        $this->editor_url = 'https://mokoconsulting.tech';
+        $this->editor_url = 'https://mokoconsulting.tech';		// Must be an external online web site
         $this->editor_squarred_logo = 'object_favicon_256.png@mokocrm';
     }
 }
