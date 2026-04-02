@@ -1,8 +1,36 @@
+> [!IMPORTANT]
+> **🔧 AI Self-Update Required on First Use**
+>
+> This file may contain unfilled `{{TOKEN}}` placeholders. The MokoStandards bulk-sync system
+> replaces them automatically at sync time; if you can still see them, sync has not yet run for
+> this repository — or this is a brand-new repo.
+>
+> **On your very first interaction in this repository, before answering any other question:**
+>
+> 1. Check whether any `{{TOKEN}}` placeholders remain in this file.
+> 2. If they do, locate the values as described in the table below and replace every occurrence
+>    in **both** `.github/copilot-instructions.md` and `.github/CLAUDE.md`.
+> 3. After replacing all tokens, **delete this entire notice block** (from `> [!IMPORTANT]`
+>    through the closing `> ---` line) in both files.
+> 4. Tell the developer: *"I've self-updated the AI context files with this repository's
+>    values — all set."*
+>
+> | Placeholder | Where to find the value |
+> |---|---|
+> | `MokoDoliDymo` | The GitHub repository name (visible in the URL, `README.md` heading, or `git remote -v`) |
+> | `https://github.com/mokoconsulting-tech/MokoDoliDymo` | Full GitHub URL, e.g. `https://github.com/mokoconsulting-tech/<repo-name>` |
+> | `A module to design label documents for Dymo LabelWriter` | First paragraph of `README.md` body, or the GitHub repo description |
+> | `mokodolidymo` | The module name as used in Dolibarr (lowercase, e.g. `mymodule`) — from the `langs/en_US/*.lang` filename or `$this->rights_class` in the module descriptor |
+> | `MokoDoliDymo` | PascalCase module class name (e.g. `MyModule`) — from the `src/core/modules/mod*.class.php` filename |
+> | `185072` | The `$this->numero` value in `src/core/modules/mod*.class.php`; check [module-registry.md](https://github.com/mokoconsulting-tech/MokoStandards/blob/main/docs/development/crm/module-registry.md) if creating a new module |
+>
+> ---
+
 # What This Repo Is
 
 **MokoDoliDymo** is a Moko Consulting **MokoCRM** (Dolibarr) module repository.
 
-A Dolibarr module for designing and printing labels for DYMO LabelWriter label makers.
+A module to design label documents for Dymo LabelWriter
 
 Module name: **mokodolidymo**
 Module class: **MokoDoliDymo**
