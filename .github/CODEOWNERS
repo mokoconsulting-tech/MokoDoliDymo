@@ -1,0 +1,48 @@
+# Copyright (C) 2026 Moko Consulting <hello@mokoconsulting.tech>
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# CODEOWNERS — require approval from jmiller-moko for protected paths
+# Synced from MokoStandards. Do not edit manually.
+#
+# Changes to these paths require review from the listed owners before merge.
+# Combined with branch protection (require PR reviews), this prevents
+# unauthorized modifications to workflows, configs, and governance files.
+
+# ── Synced workflows (managed by MokoStandards — do not edit manually) ────
+/.github/workflows/deploy-dev.yml                @jmiller-moko
+/.github/workflows/deploy-demo.yml               @jmiller-moko
+/.github/workflows/deploy-rs.yml                 @jmiller-moko
+/.github/workflows/auto-release.yml              @jmiller-moko
+/.github/workflows/auto-dev-issue.yml            @jmiller-moko
+/.github/workflows/auto-assign.yml               @jmiller-moko
+/.github/workflows/sync-version-on-merge.yml     @jmiller-moko
+/.github/workflows/enterprise-firewall-setup.yml @jmiller-moko
+/.github/workflows/repository-cleanup.yml        @jmiller-moko
+/.github/workflows/standards-compliance.yml      @jmiller-moko
+/.github/workflows/codeql-analysis.yml           @jmiller-moko
+/.github/workflows/repo_health.yml               @jmiller-moko
+# Custom workflows in .github/workflows/ not listed above are repo-owned.
+
+# ── GitHub configuration ─────────────────────────────────────────────────
+/.github/ISSUE_TEMPLATE/                @jmiller-moko
+/.github/CODEOWNERS                     @jmiller-moko
+/.github/copilot.yml                    @jmiller-moko
+/.github/copilot-instructions.md        @jmiller-moko
+/.github/CLAUDE.md                      @jmiller-moko
+/.github/.mokostandards                 @jmiller-moko
+
+# ── Build and config files ───────────────────────────────────────────────
+/composer.json                          @jmiller-moko
+/phpstan.neon                           @jmiller-moko
+/Makefile                               @jmiller-moko
+/.ftpignore                            @jmiller-moko
+/.gitignore                             @jmiller-moko
+/.gitattributes                         @jmiller-moko
+/.editorconfig                          @jmiller-moko
+
+# ── Governance documents ─────────────────────────────────────────────────
+/LICENSE                                @jmiller-moko
+/CONTRIBUTING.md                        @jmiller-moko
+/SECURITY.md                            @jmiller-moko
+/GOVERNANCE.md                          @jmiller-moko
+/CODE_OF_CONDUCT.md                     @jmiller-moko
